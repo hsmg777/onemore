@@ -1,7 +1,11 @@
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play, Volume2, VolumeX } from 'lucide-react';
 
 export function HeroSection() {
+  const [isMuted, setIsMuted] = useState(true);
+  const productVideoRef = useRef<HTMLVideoElement>(null);
+
   const scrollToDemo = () => {
     const element = document.getElementById('demo');
     if (element) {
@@ -113,12 +117,40 @@ export function HeroSection() {
             className="relative"
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-cyan-500/20">
-              <img
-                src="https://images.unsplash.com/photo-1758274525958-4a7e209a1e0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGh5JTIwd29tYW4lMjB3ZWxsbmVzcyUyMGVuZXJneXxlbnwxfHx8fDE3NzIzMzQ2MDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Wellness"
-                className="w-full h-auto"
+              <video
+                ref={productVideoRef}
+                src="/video/vsl.mp4"
+                className="w-full aspect-[16/10] object-cover"
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f24] via-transparent to-transparent" />
+              <button
+                type="button"
+                onClick={() => {
+                  const nextMuted = !isMuted;
+                  setIsMuted(nextMuted);
+                  if (productVideoRef.current) {
+                    productVideoRef.current.muted = nextMuted;
+                  }
+                }}
+                className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-[#0a0f24]/70 px-4 py-2 text-sm text-white backdrop-blur-sm transition hover:bg-[#0a0f24]/90"
+                aria-label={isMuted ? 'Activar audio' : 'Silenciar audio'}
+              >
+                {isMuted ? (
+                  <>
+                    <VolumeX className="h-4 w-4" />
+                    Activar audio
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="h-4 w-4" />
+                    Silenciar
+                  </>
+                )}
+              </button>
             </div>
           </motion.div>
         </div>

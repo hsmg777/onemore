@@ -4,6 +4,7 @@ import { HeroSection } from "./components/HeroSection";
 import { HowItWorksSection } from "./components/HowItWorksSection";
 import { SolutionsSection } from "./components/SolutionsSection";
 import { BenefitsSection } from "./components/BenefitsSection";
+import { ProblemsSection } from "./components/ProblemsSection";
 import { DemoSection } from "./components/DemoSection";
 import { BusinessSection } from "./components/BusinessSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
@@ -21,6 +22,7 @@ function App() {
         <HowItWorksSection />
         <SolutionsSection />
         <BenefitsSection />
+        <ProblemsSection />
         <DemoSection />
         <BusinessSection />
         <TestimonialsSection />

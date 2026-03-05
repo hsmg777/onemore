@@ -78,10 +78,10 @@ export function HowItWorksSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-500/20"
+          className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-3xl shadow-2xl shadow-blue-500/20"
         >
           <img
-            src="https://images.unsplash.com/photo-1707944745880-5c8a64617458?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmFuc2Rlcm1hbCUyMHBhdGNoJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NzIzMzQ2MDR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            src="/images/howitworks.png"
             alt="Sistema transdérmico"
             className="w-full h-64 md:h-96 object-cover"
           />
@@ -91,3 +91,4 @@ export function HowItWorksSection() {
     </section>
   );
 }
+

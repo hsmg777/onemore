@@ -62,6 +62,12 @@ export function Navigation() {
               Negocio
             </button>
             <button
+              onClick={() => scrollToSection('empresa')}
+              className="text-white/80 hover:text-white transition-colors"
+            >
+              Empresa
+            </button>
+            <button
               onClick={() => scrollToSection('contacto')}
               className="text-white/80 hover:text-white transition-colors"
             >
@@ -111,6 +117,12 @@ export function Navigation() {
               className="w-full text-left text-white/90 hover:text-white px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
             >
               Negocio
+            </button>
+            <button
+              onClick={() => scrollToSection('empresa')}
+              className="w-full text-left text-white/90 hover:text-white px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              Empresa
             </button>
             <button
               onClick={() => scrollToSection('contacto')}

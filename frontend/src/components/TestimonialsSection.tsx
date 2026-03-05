@@ -1,58 +1,40 @@
 import { motion } from 'framer-motion';
 import { useInView } from './useInView';
-import { Star } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { Volume2, VolumeX, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export function TestimonialsSection() {
   const [ref, isInView] = useInView();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const testimonials = [
-    {
-      name: 'María González',
-      role: 'Profesional ejecutiva',
-      image: 'https://images.unsplash.com/photo-1635367216109-aa3353c0c22e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWxsbmVzcyUyMGxpZmVzdHlsZSUyMGhlYWx0aHxlbnwxfHx8fDE3NzIzMzQ2MDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      testimonial: 'Después de usar el sistema One More, mi energía durante el día mejoró notablemente. Ya no necesito tantos cafés para mantenerme activa.',
-      result: 'Más energía y mejor rendimiento',
-    },
-    {
-      name: 'Carlos Mendoza',
-      role: 'Deportista',
-      image: 'https://images.unsplash.com/photo-1758274525958-4a7e209a1e0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGh5JTIwd29tYW4lMjB3ZWxsbmVzcyUyMGVuZXJneXxlbnwxfHx8fDE3NzIzMzQ2MDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      testimonial: 'El acompañamiento personalizado fue clave. El sistema es fácil de usar y los resultados son reales. Mi descanso mejoró un 100%.',
-      result: 'Mejor descanso y recuperación',
-    },
-    {
-      name: 'Ana Rodríguez',
-      role: 'Emprendedora',
-      image: 'https://images.unsplash.com/photo-1626105985478-82a838e3d104?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHN1Y2Nlc3MlMjBlbnRyZXByZW5ldXJ8ZW58MXx8fHwxNzcyMzM0NjA0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      testimonial: 'No solo mejoró mi calidad de vida, sino que también encontré una oportunidad de negocio que me apasiona. La comunidad es increíble.',
-      result: 'Mejor calidad de vida y nuevos ingresos',
-    },
+  const testimonialVideos = [
+    { src: '/video/testimonio1.mp4', label: 'Testimonio 1' },
+    { src: '/video/testimonio2.mp4', label: 'Testimonio 2' },
+    { src: '/video/testimonio3.mp4', label: 'Testimonio 3' },
   ];
 
   const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setCurrentIndex((prev) => (prev + 1) % testimonialVideos.length);
   };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentIndex((prev) => (prev - 1 + testimonialVideos.length) % testimonialVideos.length);
   };
 
-  const currentTestimonial = testimonials[currentIndex];
-
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative overflow-hidden py-24">
       <div className="absolute inset-0 bg-gradient-to-b from-[#1e3a8a] to-[#0a0f24]" />
 
-      <div className="container mx-auto px-6 relative z-10" ref={ref}>
+      <div className="container relative z-10 mx-auto px-6" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-5xl text-white mb-4">
+          <h2 className="mb-4 text-4xl text-white md:text-5xl">
             Historias de{' '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               bienestar
@@ -63,68 +45,87 @@ export function TestimonialsSection() {
 
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto"
+          className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]"
         >
-          <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-12">
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              <div className="flex-shrink-0">
-                <img
-                  src={currentTestimonial.image}
-                  alt={currentTestimonial.name}
-                  className="w-32 h-32 rounded-full object-cover border-4 border-cyan-500/30"
-                />
-              </div>
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+            <p className="mb-3 text-sm uppercase tracking-wide text-cyan-300">
+              Testimonios reales
+            </p>
+            <h3 className="mb-4 text-3xl text-white md:text-4xl">
+              Historias que confirman resultados
+            </h3>
+            <p className="text-lg leading-relaxed text-white/75">
+              Mira testimonios en video de personas que ya iniciaron su proceso de bienestar.
+              Usa las flechas para cambiar de video y conocer mas experiencias reales.
+            </p>
 
-              <div className="flex-1 text-center md:text-left">
-                <div className="flex gap-1 mb-4 justify-center md:justify-start">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-
-                <p className="text-xl text-white/90 mb-6 italic">
-                  "{currentTestimonial.testimonial}"
-                </p>
-
-                <div className="inline-block px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-full text-cyan-400 mb-4">
-                  {currentTestimonial.result}
-                </div>
-
-                <div>
-                  <p className="text-white text-xl">{currentTestimonial.name}</p>
-                  <p className="text-white/60">{currentTestimonial.role}</p>
-                </div>
-              </div>
+            <div className="mt-8">
+              <a
+                href="https://t.me/+oNI_Q3iixrc5Zjcx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-8 py-4 text-base font-semibold text-white transition-all hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/40"
+              >
+                Ver mas testimonios
+              </a>
             </div>
           </div>
 
-          <div className="flex justify-center gap-4 mt-8">
+          <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-3 backdrop-blur-sm md:p-4">
+            <video
+              ref={videoRef}
+              src={testimonialVideos[currentIndex].src}
+              className="aspect-[9/16] w-full rounded-2xl bg-black object-contain"
+              autoPlay
+              loop
+              playsInline
+              muted={isMuted}
+            />
+
             <button
+              type="button"
               onClick={prevTestimonial}
-              className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-white transition-all"
+              className="absolute left-5 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-[#0a0f24]/70 text-white backdrop-blur-sm transition hover:bg-[#0a0f24]/90"
+              aria-label="Video anterior"
             >
-              ←
+              <ChevronLeft className="h-5 w-5" />
             </button>
-            <div className="flex gap-2 items-center">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentIndex ? 'bg-cyan-400 w-8' : 'bg-white/30'
-                  }`}
-                />
-              ))}
-            </div>
+
             <button
+              type="button"
               onClick={nextTestimonial}
-              className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-white transition-all"
+              className="absolute right-5 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-[#0a0f24]/70 text-white backdrop-blur-sm transition hover:bg-[#0a0f24]/90"
+              aria-label="Video siguiente"
             >
-              →
+              <ChevronRight className="h-5 w-5" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                const nextMuted = !isMuted;
+                setIsMuted(nextMuted);
+                if (videoRef.current) {
+                  videoRef.current.muted = nextMuted;
+                }
+              }}
+              className="absolute bottom-6 right-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-[#0a0f24]/70 px-4 py-2 text-sm text-white backdrop-blur-sm transition hover:bg-[#0a0f24]/90"
+              aria-label={isMuted ? 'Activar audio' : 'Silenciar audio'}
+            >
+              {isMuted ? (
+                <>
+                  <VolumeX className="h-4 w-4" />
+                  Activar audio
+                </>
+              ) : (
+                <>
+                  <Volume2 className="h-4 w-4" />
+                  Silenciar
+                </>
+              )}
             </button>
           </div>
         </motion.div>
