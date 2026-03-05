@@ -1,11 +1,24 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, Phone, X } from 'lucide-react';
 import logoImage from '/images/logo.png';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const phoneNumber = '0990026711';
+
+  const phoneNumbers = [
+    { label: '+593 98 786 8058', value: '+593987868058' },
+    { label: '+593 98 450 7074', value: '+593984507074' },
+    { label: '+593 99 002 6711', value: '+593990026711', primary: true },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,12 +88,47 @@ export function Navigation() {
             </button>
           </div>
 
-          <a
-            href={`tel:${phoneNumber}`}
-            className="hidden md:inline-flex items-center px-5 py-2 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full text-white hover:shadow-lg hover:shadow-emerald-500/50 transition-all"
-          >
-            Llamar ahora
-          </a>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                className="hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-green-500 px-5 py-2 text-white shadow-sm shadow-emerald-950/40 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/80 data-[state=open]:shadow-lg data-[state=open]:shadow-emerald-500/45"
+              >
+                Llamar ahora
+                <ChevronDown className="h-4 w-4 transition-transform data-[state=open]:rotate-180" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              sideOffset={10}
+              className="w-72 rounded-2xl border border-white/15 bg-[#0a0f24]/95 p-2 text-white shadow-2xl shadow-black/40 backdrop-blur-xl"
+            >
+              <DropdownMenuLabel className="px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/60">
+                Telefonos de contacto
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-white/10" />
+              {phoneNumbers.map((phone) => (
+                <DropdownMenuItem
+                  key={phone.value}
+                  asChild
+                  className="mt-1 cursor-pointer rounded-xl p-0 focus:bg-white/10 focus:text-white"
+                >
+                  <a
+                    href={`tel:${phone.value}`}
+                    className="grid w-full grid-cols-[16px_1fr] gap-x-3 gap-y-1 px-3 py-3"
+                  >
+                    <Phone className={`h-4 w-4 text-emerald-300 ${phone.primary ? 'row-span-2 mt-0.5' : ''}`} />
+                    <span className="text-sm font-medium text-white/95 whitespace-nowrap">{phone.label}</span>
+                    {phone.primary && (
+                      <span className="w-fit whitespace-nowrap rounded-full border border-emerald-300/30 bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-200">
+                        Numero primario
+                      </span>
+                    )}
+                  </a>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <button
             type="button"
@@ -130,12 +178,28 @@ export function Navigation() {
             >
               Contacto
             </button>
-            <a
-              href={`tel:${phoneNumber}`}
-              className="block w-full text-center mt-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg text-white"
-            >
-              Llamar ahora
-            </a>
+            <div className="mt-2 rounded-lg border border-white/10 bg-white/5 p-2">
+              <p className="px-2 pb-1 text-xs font-semibold uppercase tracking-[0.12em] text-white/60">Llamar ahora</p>
+              {phoneNumbers.map((phone) => (
+                <a
+                  key={phone.value}
+                  href={`tel:${phone.value}`}
+                  className={`flex gap-2 rounded-lg px-2 py-2 text-white/90 transition-colors hover:bg-white/10 ${
+                    phone.primary ? 'flex-col items-start' : 'items-center justify-between'
+                  }`}
+                >
+                  <span className="flex items-center gap-2 text-sm font-medium whitespace-nowrap">
+                    <Phone className="h-4 w-4 text-emerald-300" />
+                    {phone.label}
+                  </span>
+                  {phone.primary && (
+                    <span className="rounded-full border border-emerald-300/30 bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-200">
+                      Numero primario
+                    </span>
+                  )}
+                </a>
+              ))}
+            </div>
           </div>
         )}
       </div>
