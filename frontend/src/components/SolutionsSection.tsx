@@ -19,7 +19,7 @@ export function SolutionsSection() {
       icon: Battery,
       category: 'Longevidad celular',
       products: 'GlutaNAD+ Boost',
-      image: '/images/glutanad.png',
+      image: '/images/glutanad.webp',
       headline: 'Formula avanzada de longevidad celular',
       benefit: 'Energia celular, reparacion del ADN y soporte antiedad',
       details:
@@ -39,7 +39,7 @@ export function SolutionsSection() {
       icon: Shield,
       category: 'Dolor y movilidad',
       products: 'Painless Night',
-      image: '/images/pngenergy.png',
+      image: '/images/pngenergy.webp',
       benefit: 'Alivio muscular y articular de forma natural',
       details:
         'Parche transdermico disenado para aliviar dolor muscular y articular con glucosamina, ginseng rojo coreano, saponinas y germanio organico. Ayuda a reducir inflamacion, mejorar circulacion y acelerar la recuperacion de tejidos, favoreciendo la regeneracion de cartilagos y la movilidad. Su liberacion continua permite absorcion directa para alivio prolongado sin necesidad de pastillas.',
@@ -57,7 +57,7 @@ export function SolutionsSection() {
       icon: TrendingDown,
       category: 'Control de peso',
       products: 'SlimStyle',
-      image: '/images/slimstyle.png',
+      image: '/images/slimstyle.webp',
       headline: 'DILE ADIOS A TODAS LAS PASTILLAS Y TRATAMIENTOS INVASIVOS',
       benefit: 'Metabolismo activo y quema de grasa con soporte natural',
       details:
@@ -77,7 +77,7 @@ export function SolutionsSection() {
       icon: Heart,
       category: 'Salud cardiovascular',
       products: 'Omevia',
-      image: '/images/omevia.png',
+      image: '/images/omevia.webp',
       benefit: 'Proteccion cardiovascular y energia celular',
       details:
         'Parche transdermico con omega-3, coenzima Q10, DHEA y pregnenolona. Ayuda a mejorar circulacion, apoyar niveles saludables de trigliceridos y reforzar energia celular. Tambien contribuye al equilibrio hormonal y al bienestar mental y fisico.',
@@ -96,7 +96,7 @@ export function SolutionsSection() {
       icon: Battery,
       category: 'Enfoque y energia',
       products: 'B12 Plus',
-      image: '/images/b12.png',
+      image: '/images/b12.webp',
       headline: 'MAXIMIZA TU ENFOQUE Y CLARIDAD MENTAL',
       benefit: 'Soporte cerebral, nervioso y cardiovascular',
       details:
@@ -116,7 +116,7 @@ export function SolutionsSection() {
       icon: Users,
       category: 'Bienestar femenino',
       products: 'One More Night - Ladies',
-      image: '/images/ladiesnights.png',
+      image: '/images/ladiesnights.webp',
       benefit: 'Apoyo hormonal y vitalidad femenina',
       details:
         'Parche transdermico para salud femenina con omega-3, L-arginina, zinc, ginseng y extractos naturales. Ayuda a mejorar circulacion, elevar energia, aliviar molestias del ciclo o menopausia y favorecer equilibrio hormonal y bienestar intimo.',
@@ -134,7 +134,7 @@ export function SolutionsSection() {
       icon: Users,
       category: 'Bienestar masculino',
       products: 'One More Night - Gentlemen',
-      image: '/images/gentlemen.png',
+      image: '/images/gentlemen.webp',
       benefit: 'Rendimiento fisico y sexual masculino',
       details:
         'Parche con maca, L-arginina, zinc y ginseng que ayuda a mejorar flujo sanguineo, apoyar testosterona y elevar energia fisica. Contribuye a la libido, resistencia y funcion erectil para mayor vitalidad general.',
@@ -152,7 +152,7 @@ export function SolutionsSection() {
       icon: Heart,
       category: 'Inmunidad y huesos',
       products: 'Dekamin',
-      image: '/images/daekamin.png',
+      image: '/images/daekamin.webp',
       benefit: 'Soporte inmune, muscular y oseo',
       details:
         'Parche nutricional con vitamina D3, K2, C y magnesio. Apoya absorcion de calcio, fortalece huesos y musculos, favorece salud cardiovascular y ayuda a reducir fatiga fisica para mayor bienestar diario.',
@@ -170,7 +170,7 @@ export function SolutionsSection() {
       icon: Moon,
       category: 'Descanso',
       products: 'Melatonin Plus',
-      image: '/images/melatonin.png',
+      image: '/images/melatonin.webp',
       benefit: 'Sueno reparador y equilibrio emocional',
       details:
         'Parche transdermico con melatonina y aceites esenciales para relajar mente y cuerpo, facilitar conciliacion del sueno y mejorar calidad del descanso. Dormir mejor tambien apoya estado de animo, defensas y control del apetito.',
@@ -187,7 +187,7 @@ export function SolutionsSection() {
       icon: Heart,
       category: 'Belleza y piel',
       products: 'Sornie Collagen',
-      image: '/images/sornie.png',
+      image: '/images/sornie.webp',
       benefit: 'Piel mas firme, hidratada y luminosa',
       details:
         'Parche con colageno, queratina hidrolizada, extractos de algas y coenzima Q10. Ayuda a mejorar elasticidad, firmeza e hidratacion, estimulando regeneracion celular y proteccion antioxidante para una piel de aspecto mas joven.',
@@ -283,8 +283,18 @@ export function SolutionsSection() {
                     src={solution.image ?? '/images/placeholder-product.svg'}
                     alt={`Imagen de ${solution.products}`}
                     className="aspect-[4/3] w-full object-cover"
+                    loading={index < 2 ? 'eager' : 'lazy'}
+                    fetchPriority={index === 0 ? 'high' : 'auto'}
+                    decoding="async"
+                    sizes="(max-width: 768px) 92vw, (max-width: 1200px) 45vw, 320px"
                     onError={(e) => {
-                      e.currentTarget.src = '/images/placeholder-product.svg';
+                      if (e.currentTarget.src.includes('.webp')) {
+                        e.currentTarget.src = e.currentTarget.src.replace('.webp', '.png');
+                        return;
+                      }
+                      if (!e.currentTarget.src.includes('/images/placeholder-product.svg')) {
+                        e.currentTarget.src = '/images/placeholder-product.svg';
+                      }
                     }}
                   />
                 </div>

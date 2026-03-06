@@ -5,6 +5,11 @@ export function useInView(options?: IntersectionObserverInit): [React.RefObject<
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -17,15 +22,21 @@ export function useInView(options?: IntersectionObserverInit): [React.RefObject<
       }
     );
 
+    const fallbackTimer = window.setTimeout(() => {
+      setIsInView((prev) => prev || true);
+    }, 1200);
+
     const currentRef = ref.current;
     if (currentRef) {
       observer.observe(currentRef);
     }
 
     return () => {
+      window.clearTimeout(fallbackTimer);
       if (currentRef) {
         observer.unobserve(currentRef);
       }
+      observer.disconnect();
     };
   }, [options]);
 
