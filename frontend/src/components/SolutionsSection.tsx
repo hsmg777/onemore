@@ -90,7 +90,7 @@ export function SolutionsSection() {
         'Retrasa el envejecimiento',
         'Poder antioxidante',
       ],
-      presentation: 'Presentación: 26 parches',
+      presentation: 'Presentación: 27 parches',
       color: 'from-cyan-500 to-blue-500',
     },
     {
@@ -110,7 +110,7 @@ export function SolutionsSection() {
         'Previene afecciones cardiovasculares',
         'Con poder antioxidante',
       ],
-      presentation: 'Presentación: 24 parches',
+      presentation: 'Presentación: 32 parches',
       color: 'from-amber-500 to-orange-500',
     },
     {
