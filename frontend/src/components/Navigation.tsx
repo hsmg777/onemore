@@ -15,9 +15,10 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const phoneNumbers = [
+    { label: '+593 99 002 6711', value: '+593990026711', primary: true },
     { label: '+593 98 786 8058', value: '+593987868058' },
     { label: '+593 98 450 7074', value: '+593984507074' },
-    { label: '+593 99 002 6711', value: '+593990026711', primary: true },
+   
   ];
 
   useEffect(() => {
