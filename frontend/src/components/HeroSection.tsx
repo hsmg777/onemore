@@ -1,10 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play, Volume2, VolumeX } from 'lucide-react';
+import { useExclusiveVideoAudio } from './useExclusiveVideoAudio';
 
 export function HeroSection() {
-  const [isMuted, setIsMuted] = useState(true);
   const productVideoRef = useRef<HTMLVideoElement>(null);
+  const { isMuted, toggleMute } = useExclusiveVideoAudio('hero-vsl', productVideoRef);
 
   const scrollToDemo = () => {
     const element = document.getElementById('demo');
@@ -129,13 +130,8 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f24] via-transparent to-transparent" />
               <button
                 type="button"
-                onClick={() => {
-                  const nextMuted = !isMuted;
-                  setIsMuted(nextMuted);
-                  if (productVideoRef.current) {
-                    productVideoRef.current.muted = nextMuted;
-                  }
-                }}
+                onClick={toggleMute}
+
                 className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-[#0a0f24]/70 px-4 py-2 text-sm text-white backdrop-blur-sm transition hover:bg-[#0a0f24]/90"
                 aria-label={isMuted ? 'Activar audio' : 'Silenciar audio'}
               >

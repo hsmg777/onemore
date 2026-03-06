@@ -37,8 +37,8 @@ export function ContactSection() {
     },
     {
       icon: MapPin,
-      label: 'Direccion',
-      value: 'Av. America y Colon, Edif. Amazonas Parc Piso 13 Oficina 132, Quito',
+      label: 'Dirección',
+      value: 'Av. América y Colón, Edif. Amazonas Parc Piso 13 Oficina 132, Quito',
       action: null,
     },
     {
@@ -85,7 +85,7 @@ export function ContactSection() {
             </span>
           </h2>
           <p className="text-xl text-white/70">
-            Estamos aqui para ayudarte a dar el siguiente paso
+            Estamos aquí para ayudarte a dar el siguiente paso
           </p>
         </motion.div>
 
@@ -159,7 +159,7 @@ export function ContactSection() {
             </div>
 
             <div className="mt-6">
-              <p className="mb-3 text-white/70">Siguenos en redes sociales</p>
+              <p className="mb-3 text-white/70">Síguenos en redes sociales</p>
               <div className="flex gap-3">
                 {socialMedia.map((social, index) => (
                   <a

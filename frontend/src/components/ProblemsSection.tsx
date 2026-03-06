@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { useInView } from './useInView';
 import { CheckCircle2, MessageCircle } from 'lucide-react';
 
@@ -7,12 +7,12 @@ export function ProblemsSection() {
 
   const items = [
     'Dolor',
-    'Sueno',
+    'Sueño',
     'Bajar de peso',
-    'Estres / ansiedad',
-    'Cansancio / poca energia',
-    'Inflamacion / articulaciones',
-    'Digestion pesada / defensas bajas',
+    'Estrés / ansiedad',
+    'Cansancio / poca energía',
+    'Inflamación / articulaciones',
+    'Digestión pesada / defensas bajas',
   ];
 
   const openWhatsAppInfo = () => {
@@ -33,15 +33,15 @@ export function ProblemsSection() {
           className="mx-auto max-w-5xl rounded-3xl border border-cyan-300/20 bg-white/5 p-8 text-center shadow-2xl shadow-cyan-900/30 backdrop-blur-sm md:p-10"
         >
           <div className="mb-5 inline-flex items-center rounded-full border border-amber-300/40 bg-amber-400/15 px-5 py-2 text-sm font-semibold tracking-wide text-amber-200">
-            ATENCION PERSONALIZADA
+            ATENCIÓN PERSONALIZADA
           </div>
 
           <h2 className="mb-3 text-3xl font-semibold text-white md:text-5xl">
-            Te identificas con alguno de estos problemas?
+            ¿Te identificas con alguno de estos problemas?
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-lg text-white/80">
-            Si hoy estas lidiando con alguno de estos sintomas, podemos orientarte con una guia clara y un plan
-            practico para empezar.
+            Si hoy estás lidiando con alguno de estos síntomas, podemos orientarte con una guía clara y un plan
+            práctico para empezar.
           </p>
 
           <div className="mx-auto grid max-w-3xl gap-3 text-left sm:grid-cols-2">
@@ -62,8 +62,8 @@ export function ProblemsSection() {
           <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-emerald-300/40 bg-gradient-to-r from-emerald-500/20 to-lime-500/20 p-5">
             <p className="text-2xl font-extrabold tracking-wide text-emerald-200 md:text-3xl">CONSULTAS GRATIS</p>
             <p className="mt-2 text-base text-white/90 md:text-lg">
-              Escribeme <span className="rounded-md bg-white/15 px-2 py-1 font-bold text-cyan-200">INFO</span> y te
-              guio segun tu caso.
+              Escríbeme <span className="rounded-md bg-white/15 px-2 py-1 font-bold text-cyan-200">INFO</span> y te
+              guio según tu caso.
             </p>
           </div>
 

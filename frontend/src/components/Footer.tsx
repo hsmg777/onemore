@@ -35,7 +35,7 @@ export function Footer() {
           </div>
 
           <div className="text-center">
-            <h3 className="text-white mb-4">Links rápidos</h3>
+            <h3 className="text-white mb-4">Enlaces rápidos</h3>
             <div className="flex flex-wrap justify-center gap-4">
               {links.map((link) => (
                 <button

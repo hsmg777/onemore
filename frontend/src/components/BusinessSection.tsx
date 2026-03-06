@@ -1,12 +1,13 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from './useInView';
+import { useExclusiveVideoAudio } from './useExclusiveVideoAudio';
 import { GraduationCap, Users, TrendingUp, ArrowRight, Volume2, VolumeX } from 'lucide-react';
 
 export function BusinessSection() {
   const [ref, isInView] = useInView();
-  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { isMuted, toggleMute } = useExclusiveVideoAudio('business-income', videoRef);
 
   const openWhatsApp = () => {
     window.open('https://wa.me/593990026711?text=Hola,%20quiero%20información%20sobre%20la%20oportunidad%20de%20negocio', '_blank');
@@ -111,13 +112,8 @@ export function BusinessSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f24] via-transparent to-transparent" />
               <button
                 type="button"
-                onClick={() => {
-                  const nextMuted = !isMuted;
-                  setIsMuted(nextMuted);
-                  if (videoRef.current) {
-                    videoRef.current.muted = nextMuted;
-                  }
-                }}
+                onClick={toggleMute}
+
                 className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-[#0a0f24]/70 px-4 py-2 text-sm text-white backdrop-blur-sm transition hover:bg-[#0a0f24]/90"
                 aria-label={isMuted ? 'Activar audio' : 'Silenciar audio'}
               >

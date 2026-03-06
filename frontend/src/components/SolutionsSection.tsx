@@ -1,12 +1,13 @@
-import { useRef, useState } from 'react';
+﻿import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from './useInView';
+import { useExclusiveVideoAudio } from './useExclusiveVideoAudio';
 import { Battery, Moon, TrendingDown, Shield, Heart, Users, Volume2, VolumeX } from 'lucide-react';
 
 export function SolutionsSection() {
   const [ref, isInView] = useInView();
-  const [isMuted, setIsMuted] = useState(true);
   const productVideoRef = useRef<HTMLVideoElement>(null);
+  const { isMuted, toggleMute } = useExclusiveVideoAudio('solutions-product', productVideoRef);
   const openWhatsAppBuy = (productName: string) => {
     const message = encodeURIComponent(
       `Hola, quiero adquirir el producto ${productName}.`
@@ -20,19 +21,19 @@ export function SolutionsSection() {
       category: 'Longevidad celular',
       products: 'GlutaNAD+ Boost',
       image: '/images/glutanad.webp',
-      headline: 'Formula avanzada de longevidad celular',
-      benefit: 'Energia celular, reparacion del ADN y soporte antiedad',
+      headline: 'Fórmula avanzada de longevidad celular',
+      benefit: 'Energía celular, reparación del ADN y soporte antiedad',
       details:
-        'GlutaNAD+ Boost combina compuestos cientificos orientados a la funcion celular para apoyar energia, reparacion del ADN y procesos biologicos de longevidad. Usa tecnologia SnapRelease en tiras orales para una alta biodisponibilidad frente a tabletas o capsulas tradicionales. Incluye NMN, precursor directo del NAD+, coenzima clave en energia celular, activacion de sirtuinas y regulacion del envejecimiento.',
+        'GlutaNAD+ Boost combina compuestos científicos orientados a la función celular para apoyar energía, reparación del ADN y procesos biológicos de longevidad. Usa tecnología SnapRelease en tiras orales para una alta biodisponibilidad frente a tabletas o cápsulas tradicionales. Incluye NMN, precursor directo del NAD+, coenzima clave en energía celular, activación de sirtuinas y regulación del envejecimiento.',
       chips: [
-        'Aumenta la energia celular',
-        'Mejora la funcion mitocondrial',
-        'Apoya la reparacion del ADN',
-        'Combate el estres oxidativo',
-        'Refuerza el sistema inmunologico',
+        'Aumenta la energía celular',
+        'Mejora la función mitocondrial',
+        'Apoya la reparación del ADN',
+        'Combate el estrés oxidativo',
+        'Refuerza el sistema inmunológico',
         'Apoya la longevidad celular',
       ],
-      presentation: 'Presentacion: 30 tiras orales | Alta biodisponibilidad | Tecnologia SnapRelease',
+      presentation: 'Presentación: 30 tiras orales | Alta biodisponibilidad | Tecnología SnapRelease',
       color: 'from-emerald-500 to-green-500',
     },
     {
@@ -42,15 +43,15 @@ export function SolutionsSection() {
       image: '/images/pngenergy.webp',
       benefit: 'Alivio muscular y articular de forma natural',
       details:
-        'Parche transdermico disenado para aliviar dolor muscular y articular con glucosamina, ginseng rojo coreano, saponinas y germanio organico. Ayuda a reducir inflamacion, mejorar circulacion y acelerar la recuperacion de tejidos, favoreciendo la regeneracion de cartilagos y la movilidad. Su liberacion continua permite absorcion directa para alivio prolongado sin necesidad de pastillas.',
+        'Parche transdérmico diseñado para aliviar dolor muscular y articular con glucosamina, ginseng rojo coreano, saponinas y germanio orgánico. Ayuda a reducir inflamación, mejorar circulación y acelerar la recuperación de tejidos, favoreciendo la regeneración de cartílagos y la movilidad. Su liberación continua permite absorción directa para alivio prolongado sin necesidad de pastillas.',
       chips: [
         'Alivia el dolor muscular y articular',
-        'Reduce la inflamacion',
+        'Reduce la inflamación',
         'Recupera la movilidad',
-        'Aumenta energia y vitalidad',
-        'Reduce el estres',
+        'Aumenta energía y vitalidad',
+        'Reduce el estrés',
       ],
-      presentation: 'Presentacion: 25 parches',
+      presentation: 'Presentación: 25 parches',
       color: 'from-red-500 to-rose-500',
     },
     {
@@ -58,19 +59,19 @@ export function SolutionsSection() {
       category: 'Control de peso',
       products: 'SlimStyle',
       image: '/images/slimstyle.webp',
-      headline: 'DILE ADIOS A TODAS LAS PASTILLAS Y TRATAMIENTOS INVASIVOS',
+      headline: 'DILE ADIÓS A TODAS LAS PASTILLAS Y TRATAMIENTOS INVASIVOS',
       benefit: 'Metabolismo activo y quema de grasa con soporte natural',
       details:
-        'Parche transdermico con espirulina, L-carnitina, te verde, jengibre, guarana y garcinia camboya. Favorece quema de grasa, ayuda a controlar apetito y mejora digestion, con absorcion continua durante el dia para resultados mas efectivos.',
+        'Parche transdérmico con espirulina, L-carnitina, té verde, jengibre, guaraná y garcinia camboya. Favorece quema de grasa, ayuda a controlar apetito y mejora digestión, con absorción continua durante el día para resultados más efectivos.',
       chips: [
         'Ayuda a quemar grasas',
         'Regula el metabolismo',
-        'Reduce la formacion de celulitis',
-        'Promueve produccion de colageno',
+        'Reduce la formación de celulitis',
+        'Promueve producción de colágeno',
         'Contribuye a la saciedad del apetito',
         'Poder antioxidante',
       ],
-      presentation: 'Presentacion: 30 parches',
+      presentation: 'Presentación: 30 parches',
       color: 'from-green-500 to-emerald-500',
     },
     {
@@ -78,38 +79,38 @@ export function SolutionsSection() {
       category: 'Salud cardiovascular',
       products: 'Omevia',
       image: '/images/omevia.webp',
-      benefit: 'Proteccion cardiovascular y energia celular',
+      benefit: 'Protección cardiovascular y energía celular',
       details:
-        'Parche transdermico con omega-3, coenzima Q10, DHEA y pregnenolona. Ayuda a mejorar circulacion, apoyar niveles saludables de trigliceridos y reforzar energia celular. Tambien contribuye al equilibrio hormonal y al bienestar mental y fisico.',
+        'Parche transdérmico con omega-3, coenzima Q10, DHEA y pregnenolona. Ayuda a mejorar circulación, apoyar niveles saludables de triglicéridos y reforzar energía celular. También contribuye al equilibrio hormonal y al bienestar mental y físico.',
       chips: [
-        'Fortalece el sistema inmunologico',
-        'Regula colesterol y presion arterial',
+        'Fortalece el sistema inmunológico',
+        'Regula colesterol y presión arterial',
         'Fortalece el cerebro',
-        'Mejora salud fisica y mental',
+        'Mejora salud física y mental',
         'Retrasa el envejecimiento',
         'Poder antioxidante',
       ],
-      presentation: 'Presentacion: 26 parches',
+      presentation: 'Presentación: 26 parches',
       color: 'from-cyan-500 to-blue-500',
     },
     {
       icon: Battery,
-      category: 'Enfoque y energia',
+      category: 'Enfoque y energía',
       products: 'B12 Plus',
       image: '/images/b12.webp',
       headline: 'MAXIMIZA TU ENFOQUE Y CLARIDAD MENTAL',
       benefit: 'Soporte cerebral, nervioso y cardiovascular',
       details:
-        'Parche vitaminico con B1, B3, B12, acido folico, vitamina C y vitamina E. Ayuda a mejorar funcion cognitiva, produccion de energia, circulacion y formacion de globulos rojos, reduciendo fatiga mental y apoyando la salud cardiovascular.',
+        'Parche vitamínico con B1, B3, B12, ácido fólico, vitamina C y vitamina E. Ayuda a mejorar función cognitiva, producción de energía, circulación y formación de glóbulos rojos, reduciendo fatiga mental y apoyando la salud cardiovascular.',
       chips: [
         'Fortalece el sistema nervioso',
-        'Potencia la renovacion celular',
-        'Facilita produccion de energia',
+        'Potencia la renovación celular',
+        'Facilita producción de energía',
         'Fortalece el cerebro',
         'Previene afecciones cardiovasculares',
         'Con poder antioxidante',
       ],
-      presentation: 'Presentacion: 24 parches',
+      presentation: 'Presentación: 24 parches',
       color: 'from-amber-500 to-orange-500',
     },
     {
@@ -119,15 +120,15 @@ export function SolutionsSection() {
       image: '/images/ladiesnights.webp',
       benefit: 'Apoyo hormonal y vitalidad femenina',
       details:
-        'Parche transdermico para salud femenina con omega-3, L-arginina, zinc, ginseng y extractos naturales. Ayuda a mejorar circulacion, elevar energia, aliviar molestias del ciclo o menopausia y favorecer equilibrio hormonal y bienestar intimo.',
+        'Parche transdérmico para salud femenina con omega-3, L-arginina, zinc, ginseng y extractos naturales. Ayuda a mejorar circulación, elevar energía, aliviar molestias del ciclo o menopausia y favorecer equilibrio hormonal y bienestar íntimo.',
       chips: [
         'Reduce molestias de menopausia',
         'Reduce dolores menstruales',
-        'Aumenta la lubricacion natural',
+        'Aumenta la lubricación natural',
         'Equilibra hormonas',
         'Aumenta la libido',
       ],
-      presentation: 'Presentacion: 27 parches',
+      presentation: 'Presentación: 27 parches',
       color: 'from-fuchsia-500 to-pink-500',
     },
     {
@@ -135,17 +136,17 @@ export function SolutionsSection() {
       category: 'Bienestar masculino',
       products: 'One More Night - Gentlemen',
       image: '/images/gentlemen.webp',
-      benefit: 'Rendimiento fisico y sexual masculino',
+      benefit: 'Rendimiento físico y sexual masculino',
       details:
-        'Parche con maca, L-arginina, zinc y ginseng que ayuda a mejorar flujo sanguineo, apoyar testosterona y elevar energia fisica. Contribuye a la libido, resistencia y funcion erectil para mayor vitalidad general.',
+        'Parche con maca, L-arginina, zinc y ginseng que ayuda a mejorar flujo sanguíneo, apoyar testosterona y elevar energía física. Contribuye a la libido, resistencia y función eréctil para mayor vitalidad general.',
       chips: [
         'Aumenta la testosterona',
         'Mejora la libido',
-        'Aumenta energia y potencia sexual',
-        'Mejora el flujo sanguineo',
+        'Aumenta energía y potencia sexual',
+        'Mejora el flujo sanguíneo',
         'Fortalece las erecciones',
       ],
-      presentation: 'Presentacion: 27 parches',
+      presentation: 'Presentación: 27 parches',
       color: 'from-indigo-500 to-violet-500',
     },
     {
@@ -153,17 +154,17 @@ export function SolutionsSection() {
       category: 'Inmunidad y huesos',
       products: 'Dekamin',
       image: '/images/daekamin.webp',
-      benefit: 'Soporte inmune, muscular y oseo',
+      benefit: 'Soporte inmune, muscular y óseo',
       details:
-        'Parche nutricional con vitamina D3, K2, C y magnesio. Apoya absorcion de calcio, fortalece huesos y musculos, favorece salud cardiovascular y ayuda a reducir fatiga fisica para mayor bienestar diario.',
+        'Parche nutricional con vitamina D3, K2, C y magnesio. Apoya absorción de calcio, fortalece huesos y músculos, favorece salud cardiovascular y ayuda a reducir fatiga física para mayor bienestar diario.',
       chips: [
-        'Fortalece el sistema inmunologico',
-        'Fortalece musculos y huesos',
-        'Reduce estres y fatiga',
+        'Fortalece el sistema inmunológico',
+        'Fortalece músculos y huesos',
+        'Reduce estrés y fatiga',
         'Reduce riesgo de enfermedades virales',
         'Ayuda a suprimir el apetito',
       ],
-      presentation: 'Presentacion: 24 parches',
+      presentation: 'Presentación: 24 parches',
       color: 'from-blue-500 to-cyan-500',
     },
     {
@@ -171,16 +172,16 @@ export function SolutionsSection() {
       category: 'Descanso',
       products: 'Melatonin Plus',
       image: '/images/melatonin.webp',
-      benefit: 'Sueno reparador y equilibrio emocional',
+      benefit: 'Sueño reparador y equilibrio emocional',
       details:
-        'Parche transdermico con melatonina y aceites esenciales para relajar mente y cuerpo, facilitar conciliacion del sueno y mejorar calidad del descanso. Dormir mejor tambien apoya estado de animo, defensas y control del apetito.',
+        'Parche transdérmico con melatonina y aceites esenciales para relajar mente y cuerpo, facilitar conciliación del sueño y mejorar calidad del descanso. Dormir mejor también apoya estado de ánimo, defensas y control del apetito.',
       chips: [
-        'Regula el sueno',
-        'Reduce el estres',
+        'Regula el sueño',
+        'Reduce el estrés',
         'Calma y relaja la mente',
         'Mejora el bienestar emocional',
       ],
-      presentation: 'Presentacion: 24 parches',
+      presentation: 'Presentación: 24 parches',
       color: 'from-indigo-500 to-purple-500',
     },
     {
@@ -188,9 +189,9 @@ export function SolutionsSection() {
       category: 'Belleza y piel',
       products: 'Sornie Collagen',
       image: '/images/sornie.webp',
-      benefit: 'Piel mas firme, hidratada y luminosa',
+      benefit: 'Piel más firme, hidratada y luminosa',
       details:
-        'Parche con colageno, queratina hidrolizada, extractos de algas y coenzima Q10. Ayuda a mejorar elasticidad, firmeza e hidratacion, estimulando regeneracion celular y proteccion antioxidante para una piel de aspecto mas joven.',
+        'Parche con colágeno, queratina hidrolizada, extractos de algas y coenzima Q10. Ayuda a mejorar elasticidad, firmeza e hidratación, estimulando regeneración celular y protección antioxidante para una piel de aspecto más joven.',
       chips: [
         'Mejora la textura de la piel',
         'Reduce arrugas',
@@ -198,7 +199,7 @@ export function SolutionsSection() {
         'Retrasa el envejecimiento',
         'Poder antioxidante',
       ],
-      presentation: 'Presentacion: 27 parches',
+      presentation: 'Presentación: 27 parches',
       color: 'from-rose-500 to-pink-500',
     },
     
@@ -222,7 +223,7 @@ export function SolutionsSection() {
             </span>
           </h2>
           <p className="mx-auto max-w-2xl text-xl text-white/70">
-            Productos disenados para cada aspecto de tu salud
+            Productos diseñados para cada aspecto de tu salud
           </p>
         </motion.div>
 
@@ -244,13 +245,8 @@ export function SolutionsSection() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f24] via-transparent to-transparent" />
           <button
             type="button"
-            onClick={() => {
-              const nextMuted = !isMuted;
-              setIsMuted(nextMuted);
-              if (productVideoRef.current) {
-                productVideoRef.current.muted = nextMuted;
-              }
-            }}
+            onClick={toggleMute}
+
             className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-[#0a0f24]/70 px-4 py-2 text-sm text-white backdrop-blur-sm transition hover:bg-[#0a0f24]/90"
             aria-label={isMuted ? 'Activar audio' : 'Silenciar audio'}
           >

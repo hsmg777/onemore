@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
 import { useInView } from './useInView';
 import { useRef, useState } from 'react';
+import { useExclusiveVideoAudio } from './useExclusiveVideoAudio';
 import { Volume2, VolumeX, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export function TestimonialsSection() {
   const [ref, isInView] = useInView();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { isMuted, toggleMute } = useExclusiveVideoAudio('testimonials-carousel', videoRef);
 
   const testimonialVideos = [
     { src: '/video/testimonio1.mp4', label: 'Testimonio 1' },
@@ -59,7 +60,7 @@ export function TestimonialsSection() {
             </h3>
             <p className="text-lg leading-relaxed text-white/75">
               Mira testimonios en video de personas que ya iniciaron su proceso de bienestar.
-              Usa las flechas para cambiar de video y conocer mas experiencias reales.
+              Usa las flechas para cambiar de video y conocer más experiencias reales.
             </p>
 
             <div className="mt-8">
@@ -69,7 +70,7 @@ export function TestimonialsSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-8 py-4 text-base font-semibold text-white transition-all hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/40"
               >
-                Ver mas testimonios
+                Ver más testimonios
               </a>
             </div>
           </div>
@@ -105,13 +106,8 @@ export function TestimonialsSection() {
 
             <button
               type="button"
-              onClick={() => {
-                const nextMuted = !isMuted;
-                setIsMuted(nextMuted);
-                if (videoRef.current) {
-                  videoRef.current.muted = nextMuted;
-                }
-              }}
+              onClick={toggleMute}
+
               className="absolute bottom-6 right-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-[#0a0f24]/70 px-4 py-2 text-sm text-white backdrop-blur-sm transition hover:bg-[#0a0f24]/90"
               aria-label={isMuted ? 'Activar audio' : 'Silenciar audio'}
             >

@@ -105,7 +105,7 @@ export function Navigation() {
               className="w-72 rounded-2xl border border-white/15 bg-[#0a0f24]/95 p-2 text-white shadow-2xl shadow-black/40 backdrop-blur-xl"
             >
               <DropdownMenuLabel className="px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/60">
-                Telefonos de contacto
+                Teléfonos de contacto
               </DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-white/10" />
               {phoneNumbers.map((phone) => (
@@ -122,7 +122,7 @@ export function Navigation() {
                     <span className="text-sm font-medium text-white/95 whitespace-nowrap">{phone.label}</span>
                     {phone.primary && (
                       <span className="w-fit whitespace-nowrap rounded-full border border-emerald-300/30 bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-200">
-                        Numero primario
+                        Número primario
                       </span>
                     )}
                   </a>
@@ -133,7 +133,7 @@ export function Navigation() {
 
           <button
             type="button"
-            aria-label={isMobileMenuOpen ? 'Cerrar menu' : 'Abrir menu'}
+            aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border border-white/20 text-white"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
           >
@@ -195,7 +195,7 @@ export function Navigation() {
                   </span>
                   {phone.primary && (
                     <span className="rounded-full border border-emerald-300/30 bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-200">
-                      Numero primario
+                      Número primario
                     </span>
                   )}
                 </a>
